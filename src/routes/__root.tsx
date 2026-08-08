@@ -113,7 +113,7 @@ const themeScript = `(function(){try{var t=localStorage.getItem("tec-theme")||"d
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className="dark">
+    <html lang="en" className="dark" style={{ colorScheme: "dark" }}>
       <head>
         <HeadContent />
       </head>
