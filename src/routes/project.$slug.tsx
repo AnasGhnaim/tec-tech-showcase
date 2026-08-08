@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
-import { projects } from "@/data/projects";
+import { projects, type Project } from "@/data/projects";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Reveal } from "@/components/Reveal";
@@ -30,7 +30,7 @@ export const Route = createFileRoute("/project/$slug")({
 });
 
 function ProjectDetail() {
-  const { project } = Route.useLoaderData();
+  const { project } = Route.useLoaderData() as { project: Project };
 
   return (
     <main className="mx-auto max-w-5xl px-5 pt-32 pb-24 sm:px-8 sm:pt-40">
