@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "motion/react";
 import { Reveal, SectionHeading } from "@/components/Reveal";
+import { useLang } from "@/i18n/LanguageProvider";
 
 interface Stat {
   value: number;
@@ -10,10 +11,10 @@ interface Stat {
 }
 
 const stats: Stat[] = [
-  { value: 12, suffix: "", label: "Projects delivered" },
-  { value: 6, suffix: "", label: "Clients served"  },
-  { value: 3, suffix: "", label: "Years in operation" },
-  { value: 94, suffix: "%", label: "Clients who return"},
+  { value: 12, suffix: "", label: "stats.delivered" },
+  { value: 6, suffix: "", label: "stats.clients" },
+  { value: 3, suffix: "", label: "stats.years" },
+  { value: 94, suffix: "%", label: "stats.retention" },
 ];
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
@@ -50,13 +51,15 @@ function Counter({ value, suffix }: { value: number; suffix: string }) {
 }
 
 export function Stats() {
+  const { t } = useLang();
+
   return (
     <section className="border-t border-border bg-surface/30 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading
-          eyebrow="Why us"
-          title="The record, in numbers we can evidence."
-          intro="No awards shelf, no partner logos we have not worked with. Just the delivery history."
+          eyebrow={t("stats.eyebrow")}
+          title={t("stats.title")}
+          intro={t("stats.intro")}
         />
 
         <div className="mt-14 grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -64,7 +67,7 @@ export function Stats() {
             <Reveal key={s.label} delay={i * 0.08}>
               <div className="border-t border-accent/60 pt-6">
                 <Counter value={s.value} suffix={s.suffix} />
-                <p className="mt-3 font-display text-base font-semibold">{s.label}</p>
+                <p className="mt-3 font-display text-base font-semibold">{t(s.label)}</p>
                 {/* <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{s.note}</p> */}
               </div>
             </Reveal>
