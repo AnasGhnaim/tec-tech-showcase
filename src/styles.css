@@ -150,7 +150,23 @@
     font-family: var(--font-display);
     letter-spacing: -0.02em;
   }
+
+  /* Arabic / RTL typography */
+  [dir="rtl"] body,
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3,
+  [dir="rtl"] h4 {
+    font-family: "IBM Plex Sans Arabic", var(--font-sans);
+    letter-spacing: 0;
+  }
+
+  [dir="rtl"] .eyebrow,
+  [dir="rtl"] .font-mono:not([dir="ltr"]) {
+    letter-spacing: 0.06em;
+  }
 }
+
 
 @media (prefers-reduced-motion: reduce) {
   html {
