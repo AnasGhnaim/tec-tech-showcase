@@ -1,33 +1,28 @@
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal, SectionHeading } from "@/components/Reveal";
-
-const pillars = [
-  {
-    tag: "01",
-    title: "Vision",
-    body: "That any ambitious business — a twelve-person co-operative as readily as a national retailer — should be able to run on software built to the same standard. Most teams are handed templates they outgrow in a year. We exist to close that gap: to make properly engineered, properly designed digital products the normal option rather than the expensive exception.",
-  },
-  {
-    tag: "02",
-    title: "Mission",
-    body: "We build e-commerce platforms, portfolio sites and custom software that hold up under real traffic and real deadlines. Every engagement starts with the numbers the client is judged on, ships in increments they can review weekly, and ends with documented code, transferred ownership and a team that can maintain it without us — though most keep us on anyway.",
-  },
-];
-
-const principles = [
-  { title: "Fixed scope, visible progress", body: "Weekly demos on a staging URL from week one. No black boxes." },
-  { title: "Own your code", body: "Repositories, infrastructure and documentation are yours from day one." },
-  { title: "Measured, not asserted", body: "We agree on the metric before we build, then report against it after launch." },
-];
+import { useLang } from "@/i18n/LanguageProvider";
 
 export function Vision() {
+  const { t } = useLang();
+
+  const pillars = [
+    { tag: "01", title: t("vision.pillar1Title"), body: t("vision.pillar1Body") },
+    { tag: "02", title: t("vision.pillar2Title"), body: t("vision.pillar2Body") },
+  ];
+
+  const principles = [
+    { title: t("vision.p1Title"), body: t("vision.p1Body") },
+    { title: t("vision.p2Title"), body: t("vision.p2Body") },
+    { title: t("vision.p3Title"), body: t("vision.p3Body") },
+  ];
+
   return (
     <section id="vision" className="scroll-mt-24 border-t border-border py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <SectionHeading
-          eyebrow="Who we are"
-          title="A small studio with an unfashionable commitment to finishing things."
-          intro="Tec-Technology has been building commercial software since 2016. We are engineers and designers, not resellers, and every project is delivered by the people who scoped it."
+          eyebrow={t("vision.eyebrow")}
+          title={t("vision.title")}
+          intro={t("vision.intro")}
         />
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
