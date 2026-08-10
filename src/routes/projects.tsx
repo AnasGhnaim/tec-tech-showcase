@@ -4,9 +4,9 @@ import { projects } from "@/data/projects";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/Reveal";
 
-const title = "Project archive — Tec-Technology";
+const title = "Project archive — FTP";
 const description =
-  "Every Tec-Technology engagement: e-commerce platforms, SaaS dashboards, portfolio sites and mobile apps, with the stack and outcomes for each.";
+  "Every FTP engagement: e-commerce platforms, SaaS dashboards, portfolio sites and mobile apps, with the stack and outcomes for each.";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({

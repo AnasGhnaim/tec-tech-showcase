@@ -13,10 +13,10 @@ export const Route = createFileRoute("/project/$slug")({
   },
   head: ({ loaderData }) => {
     if (!loaderData) {
-      return { meta: [{ title: "Project not found — Tec-Technology" }, { name: "robots", content: "noindex" }] };
+      return { meta: [{ title: "Project not found — FTP" }, { name: "robots", content: "noindex" }] };
     }
     const { project } = loaderData;
-    const title = `${project.title} — Tec-Technology`;
+    const title = `${project.title} — FTP`;
     return {
       meta: [
         { title },
