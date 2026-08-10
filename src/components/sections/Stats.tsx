@@ -6,14 +6,14 @@ interface Stat {
   value: number;
   suffix: string;
   label: string;
-  note: string;
+  // note: string;
 }
 
 const stats: Stat[] = [
-  { value: 124, suffix: "", label: "Projects delivered", note: "Since the studio opened in 2016" },
-  { value: 68, suffix: "", label: "Clients served", note: "Across retail, logistics, finance and the arts" },
-  { value: 9, suffix: "", label: "Years in operation", note: "Same founding engineering team" },
-  { value: 94, suffix: "%", label: "Clients who return", note: "Second engagement within 18 months" },
+  { value: 12, suffix: "", label: "Projects delivered" },
+  { value: 6, suffix: "", label: "Clients served"  },
+  { value: 3, suffix: "", label: "Years in operation" },
+  { value: 94, suffix: "%", label: "Clients who return"},
 ];
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
@@ -65,7 +65,7 @@ export function Stats() {
               <div className="border-t border-accent/60 pt-6">
                 <Counter value={s.value} suffix={s.suffix} />
                 <p className="mt-3 font-display text-base font-semibold">{s.label}</p>
-                <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{s.note}</p>
+                {/* <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{s.note}</p> */}
               </div>
             </Reveal>
           ))}

@@ -12,26 +12,29 @@ export interface Project {
   results: { label: string; value: string }[];
 }
 
-import ecommerce from "@/assets/project-ecommerce.jpg";
-import portfolio from "@/assets/project-portfolio.jpg";
-import saas from "@/assets/project-saas.jpg";
-import mobile from "@/assets/project-mobile.jpg";
-import marketplace from "@/assets/project-marketplace.jpg";
-import studio from "@/assets/project-studio.jpg";
+
+
+import alKharouf2 from "@/assets/alkharouf2.png";
+import alameer from "@/assets/alameer.png";
+import Verdent from "@/assets/Verdant.png"
+import slimfit from "@/assets/slimfit.png"
+import QawiWeb from "@/assets/QawiWeb.png";
+import QawiMobile from "@/assets/QawiMobile.png";
 
 export const projects: Project[] = [
+  
   {
-    slug: "atlas-commerce",
-    title: "Atlas Commerce",
-    client: "Atlas Home Goods",
-    category: "E-commerce",
-    summary: "Headless storefront replacing a legacy platform, rebuilt around a 3-step checkout.",
+    slug: "Al-Kharouf",
+    title: "Al-Kharouf",
+    client: "Tareq AlKharouf",
+    category: "Portfolio",
+    summary: "AlKharouf is a name built on the belief that a suit is more than fabric and thread. Since 1951, we have pursued excellence in every detail, from the weave of the cloth to the precision of each cut. Our creations carry heritage and purpose, designed for men who move through the world with quiet distinction.",
     description:
-      "Atlas was losing carts on a template store that took nine seconds to render a category page. We rebuilt the storefront headless: a React front end backed by a typed product API, edge-cached catalogue pages, and a checkout collapsed from six steps to three. Inventory, pricing and promotions stay in the client's existing ERP and sync through a webhook pipeline we maintain.",
+      "A live full-stack tailoring platform for a bespoke suit business. Includes product catalog, custom orders, suit workflow management, and secure customer interactions.",
     year: "2025",
-    liveUrl: "https://example.com/atlas",
-    tech: ["React", "TypeScript", "Node.js", "PostgreSQL", "Stripe", "Redis"],
-    image: ecommerce,
+    liveUrl: "https://www.al-kharouf.com/",
+    tech: ["React", "TypeScript", "Node.js","Express.js" ,"PostgreSQL","Tailwind CSS", "Framer Motion"],
+    image: alKharouf2,
     results: [
       { label: "Checkout completion", value: "+41%" },
       { label: "Category page load", value: "0.8s" },
@@ -39,57 +42,21 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "meridian-studio",
-    title: "Meridian Studio",
-    client: "Meridian Architects",
+    slug: "al-ameer",
+    title: "Al-Ameer Paper & Board",
+    client: "Waleed Shaheen",
     category: "Portfolio",
-    summary: "An editorial portfolio for an architecture practice, built around large-format imagery.",
+    summary: "Established in 2001, Al-Ameer Paper & Board Trading Co. began with a vision to become Jordan's most trusted supplier of premium paperboard and printing materials. From day one, we committed ourselves to quality, reliability, and exceptional service.",
     description:
-      "Meridian needed their built work to carry the site rather than the layout. We designed a typographic, near-monochrome shell with progressive image loading so 40-megapixel project photography opens instantly on mobile. Editors publish new projects themselves through a structured content model — no developer in the loop.",
+      "A professional business website developed to showcase products, company profile, and services with a clean, responsive design.",
     year: "2025",
-    liveUrl: "https://example.com/meridian",
-    tech: ["React", "TypeScript", "Framer Motion", "Sanity CMS"],
-    image: studio,
+    liveUrl: "https://www.alameerpaper.com/",
+    tech: ["React", "TypeScript", "Framer Motion"],
+    image: alameer,
     results: [
       { label: "Lighthouse performance", value: "99" },
       { label: "Enquiries per month", value: "3.2x" },
       { label: "Publish time per project", value: "6 min" },
-    ],
-  },
-  {
-    slug: "cadence-ops",
-    title: "Cadence Ops",
-    client: "Cadence Logistics",
-    category: "SaaS",
-    summary: "Multi-tenant operations dashboard for fleet dispatchers, live to 600 daily users.",
-    description:
-      "A dispatch platform where every second of latency is a delayed delivery. We built a multi-tenant workspace with role-scoped access, a websocket event stream that keeps 600 concurrent dispatchers in sync, and an audit log that satisfies the client's compliance obligations. Row-level security is enforced in the database, not the client.",
-    year: "2024",
-    liveUrl: "https://example.com/cadence",
-    tech: ["React", "TypeScript", "PostgreSQL", "WebSockets", "Docker"],
-    image: saas,
-    results: [
-      { label: "Daily active dispatchers", value: "600+" },
-      { label: "Event latency p95", value: "120ms" },
-      { label: "Manual reports removed", value: "18" },
-    ],
-  },
-  {
-    slug: "northline-mobile",
-    title: "Northline",
-    client: "Northline Bank",
-    category: "Mobile",
-    summary: "Cross-platform banking companion app with biometric auth and offline statements.",
-    description:
-      "A companion app for a regional bank's retail customers. Biometric authentication, offline-readable statements, and instant card freeze — all built on a shared React Native codebase so a single team ships iOS and Android in the same sprint. Every network call is certificate-pinned and the app passed third-party penetration testing on the first pass.",
-    year: "2024",
-    liveUrl: "https://example.com/northline",
-    tech: ["React Native", "TypeScript", "GraphQL", "Node.js"],
-    image: mobile,
-    results: [
-      { label: "App store rating", value: "4.8" },
-      { label: "Support calls", value: "-27%" },
-      { label: "Cold start", value: "1.1s" },
     ],
   },
   {
@@ -100,10 +67,10 @@ export const projects: Project[] = [
     summary: "Subscription grocery marketplace for a 40-farm co-operative with split fulfilment.",
     description:
       "Forty independent farms selling from one storefront, each with their own stock, cut-off times and delivery radius. We modelled split fulfilment properly: one customer basket becomes several producer orders, payouts are reconciled weekly, and subscribers can pause or swap a box up to 24 hours before dispatch.",
-    year: "2025",
-    liveUrl: "https://example.com/verdant",
-    tech: ["React", "TypeScript", "Node.js", "PostgreSQL", "Stripe Connect"],
-    image: marketplace,
+    year: "2026",
+    liveUrl: "https://feedwell-admin-kappa.vercel.app/",
+    tech: ["React", "TypeScript", "Java","Spring","PostgreSQL"],
+    image: Verdent,
     results: [
       { label: "Producers onboarded", value: "40" },
       { label: "Weekly subscriptions", value: "2,100" },
@@ -111,23 +78,60 @@ export const projects: Project[] = [
     ],
   },
   {
-    slug: "ravel-portfolio",
-    title: "Ravel",
-    client: "Ravel Sound Design",
-    category: "Portfolio",
-    summary: "Audio-first showcase site with waveform players and a bookings pipeline.",
+    slug: "slim-fit",
+    title: "Slim & Fit Nutrition",
+    client: "Slim & Fit Nutrition",
+    category: "E-commerce",
+    summary: "Nutrition and diet-planning platform with personalized meal tracking.",
     description:
-      "A sound studio whose work can only be judged by listening. We built custom waveform players that stream without blocking scroll, a reel that adapts to connection speed, and a booking flow that drops enquiries straight into the studio's calendar with the referenced track attached.",
-    year: "2024",
-    liveUrl: "https://example.com/ravel",
-    tech: ["React", "TypeScript", "Web Audio API", "Tailwind CSS"],
-    image: portfolio,
+      "A nutrition coaching platform built as a pnpm monorepo with a shared Express API. We handled client onboarding, macro-based meal planning, and progress tracking in one cohesive flow, with a lean deployment pipeline that ships frontend and API together on Vercel.",
+    year: "2026",
+    liveUrl: "https://slim-fit-slimfit-nutrition-delta.vercel.app/",
+    tech: ["React", "TypeScript", "Vite", "Express", "pnpm"],
+    image: slimfit,
     results: [
-      { label: "Average session", value: "4m 12s" },
-      { label: "Booking conversion", value: "+58%" },
-      { label: "Reel bandwidth saved", value: "44%" },
+      { label: "Load time", value: "0.9s" },
+      { label: "Meal plans generated", value: "500+" },
+      { label: "API response time", value: "80ms" },
     ],
-  },
+},
+
+{
+  slug: "qawi-web",
+  title: "Qawi",
+  client: "Qawi Gym Management",
+  category: "SaaS",
+  summary: "Gym management platform for owners to handle members, classes, and billing.",
+  description:
+    "A full-featured gym management SaaS built on a Spring Boot backend with a React frontend. Owns member management, class scheduling, and billing in one dashboard, with Zustand-driven state sliced by domain and form validation enforced end-to-end for staff-facing workflows.",
+  year: "2026",
+  liveUrl: "https://your-qawi-web-url.vercel.app/",
+  tech: ["React", "TypeScript", "Zustand", "Spring Boot", "PostgreSQL", "Docker"],
+  image: QawiWeb,
+  results: [
+    { label: "Gyms onboarded", value: "TBD" },
+    { label: "Load time", value: "TBD" },
+    { label: "Active members tracked", value: "TBD" },
+  ],
+},
+{
+  slug: "qawi-mobile",
+  title: "Qawi Mobile",
+  client: "Qawi Gym Management",
+  category: "Mobile",
+  summary: "Cross-platform companion app for gym members to book classes and track progress.",
+  description:
+    "A React Native companion app sharing the same Spring Boot backend as the web dashboard. Members book classes, track attendance, and manage their membership on the go, with a Zustand store sliced by domain and FlatList rendering tuned for large class and member lists.",
+  year: "2026",
+  liveUrl: "",
+  tech: ["React Native", "TypeScript", "Zustand", "Expo", "Spring Boot"],
+  image: QawiMobile,
+  results: [
+    { label: "Cold start", value: "TBD" },
+    { label: "App store rating", value: "TBD" },
+    { label: "Class bookings/month", value: "TBD" },
+  ],
+},
 ];
 
 export const projectCategories = ["All", "E-commerce", "Portfolio", "SaaS", "Mobile"] as const;
