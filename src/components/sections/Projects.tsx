@@ -7,10 +7,13 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Reveal, SectionHeading } from "@/components/Reveal";
 import { cn } from "@/lib/utils";
+import { useLang } from "@/i18n/LanguageProvider";
+import { projectsAr } from "@/i18n/content";
 
 export function Projects() {
   const [filter, setFilter] = useState<ProjectCategory>("All");
   const reduced = useReducedMotion();
+  const { t, lang } = useLang();
   const visible = filter === "All" ? projects : projects.filter((p) => p.category === filter);
 
   return (
@@ -18,15 +21,15 @@ export function Projects() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="flex flex-wrap items-end justify-between gap-6">
           <SectionHeading
-            eyebrow="Selected work"
-            title="Shipped, live, and still maintained."
-            intro="Six recent engagements across commerce, product and mobile. Each one is running in production today."
+            eyebrow={t("projects.eyebrow")}
+            title={t("projects.title")}
+            intro={t("projects.intro")}
           />
           <Reveal delay={0.1}>
             <Button asChild variant="outline">
               <Link to="/projects">
-                Full archive
-                <ArrowUpRight className="size-4" />
+                {t("projects.archive")}
+                <ArrowUpRight className="size-4 rtl:-scale-x-100" />
               </Link>
             </Button>
           </Reveal>
@@ -51,16 +54,19 @@ export function Projects() {
                   transition={{ type: "spring", stiffness: 380, damping: 32 }}
                 />
               )}
-              <span className="relative">{cat}</span>
+              <span className="relative">{cat === "All" ? t("projects.all") : t(`projects.${cat}`)}</span>
             </button>
           ))}
         </Reveal>
 
         <motion.div layout className="mt-10 grid gap-6 sm:grid-cols-2">
           <AnimatePresence mode="popLayout">
-            {visible.map((project) => (
+            {visible.map((base) => {
+              const ar = lang === "ar" ? projectsAr[base.slug] : undefined;
+              const project = { ...base, ...(ar ?? {}) };
+              return (
               <motion.article
-                key={project.slug}
+                key={base.slug}
                 layout
                 initial={{ opacity: 0, scale: reduced ? 1 : 0.97 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -70,7 +76,7 @@ export function Projects() {
               >
                 <Link
                   to="/project/$slug"
-                  params={{ slug: project.slug }}
+                  params={{ slug: base.slug }}
                   className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
                 >
                   <div className="relative aspect-[4/3] overflow-hidden border-b border-border">
@@ -83,7 +89,7 @@ export function Projects() {
                       className="size-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"
                     />
                     <span className="absolute left-4 top-4 rounded-full border border-border bg-background/80 px-3 py-1 font-mono text-[10px] uppercase tracking-[0.16em] backdrop-blur">
-                      {project.category}
+                      {t(`projects.${base.category}`)}
                     </span>
                   </div>
 
@@ -110,7 +116,8 @@ export function Projects() {
                   </div>
                 </Link>
               </motion.article>
-            ))}
+              );
+            })}
           </AnimatePresence>
         </motion.div>
       </div>

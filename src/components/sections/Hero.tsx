@@ -4,6 +4,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import HeroScene from "@/components/three/HeroScene";
 import { staggerContainer, staggerItem } from "@/components/Reveal";
+import { useLang } from "@/i18n/LanguageProvider";
 
 const TECH_STACK = [
   "React",
@@ -19,6 +20,7 @@ const TECH_STACK = [
 
 function TechMarquee() {
   const reduced = useReducedMotion();
+  const { isRtl } = useLang();
   // Duplicate the list so the loop is seamless (second copy starts exactly where first ends)
   const items = [...TECH_STACK, ...TECH_STACK];
 
@@ -33,16 +35,15 @@ function TechMarquee() {
       }}
     >
       <motion.div
+        dir="ltr"
         className="flex w-max gap-10 font-mono text-[11px] uppercase tracking-[0.2em] text-muted-foreground"
-        animate={reduced ? undefined : { x: ["0%", "-50%"] }}
+        {...(reduced ? {} : { animate: { x: isRtl ? ["-50%", "0%"] : ["0%", "-50%"] } })}
         transition={{
           duration: 22,
           ease: "linear",
           repeat: Infinity,
         }}
         style={{ willChange: "transform" }}
-        // Pause on hover
-        whileHover={reduced ? undefined : { animationPlayState: "paused" }}
       >
         {items.map((tech, i) => (
           <span key={`${tech}-${i}`} className="flex items-center gap-10 shrink-0">
@@ -59,6 +60,7 @@ function TechMarquee() {
 
 export function Hero() {
   const reduced = useReducedMotion();
+  const { t } = useLang();
 
   return (
     <section className="relative overflow-hidden pt-28 pb-20 sm:pt-36 sm:pb-28">
@@ -67,34 +69,33 @@ export function Hero() {
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-[1.05fr_0.95fr]">
         <motion.div variants={staggerContainer} initial="hidden" animate="show">
           <motion.p variants={staggerItem} className="eyebrow font-display">
-            Software development agency
+            {t("hero.eyebrow")}
           </motion.p>
 
           <motion.h1
             variants={staggerItem}
             className="mt-5 font-display text-4xl font-semibold leading-[1.05] text-balance sm:text-5xl md:text-6xl"
           >
-            We build the software your
-            <span className="text-accent"> business runs on</span>.
+            {t("hero.titleA")}
+            <span className="text-accent">{t("hero.titleAccent")}</span>.
           </motion.h1>
 
           <motion.p
             variants={staggerItem}
             className="mt-6 max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
           >
-            Tec-Technology designs and engineers e-commerce platforms, portfolio sites and custom
-            systems — typed end to end, measured against your numbers, and handed over with the keys.
+            {t("hero.lead")}
           </motion.p>
 
           <motion.div variants={staggerItem} className="mt-9 flex flex-wrap gap-3">
             <Button asChild size="lg">
               <a href="#projects">
-                View projects
-                <ArrowRight className="size-4" />
+                {t("hero.viewProjects")}
+                <ArrowRight className="size-4 rtl:rotate-180" />
               </a>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <a href="#contact">Get in touch</a>
+              <a href="#contact">{t("hero.getInTouch")}</a>
             </Button>
           </motion.div>
 
@@ -103,9 +104,9 @@ export function Hero() {
             className="mt-12 grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-6"
           >
             {[
-              { k: "Since", v: "2026" },
-              { k: "Projects", v: "12+" },
-              { k: "Avg. build", v: "9 wks" },
+              { k: t("hero.since"), v: "2026" },
+              { k: t("hero.projects"), v: "12+" },
+              { k: t("hero.avgBuild"), v: t("hero.avgBuildValue") },
             ].map((s) => (
               <div key={s.k}>
                 <dt className="eyebrow font-display">{s.k}</dt>
@@ -124,10 +125,7 @@ export function Hero() {
           <div className="absolute inset-0" aria-hidden="true">
             <HeroScene />
           </div>
-          <span className="sr-only">
-            Animated 3D rendering of an interlocking geometric structure representing Tec-Technology's
-            engineering work.
-          </span>
+          <span className="sr-only">{t("hero.sceneAlt")}</span>
         </motion.div>
       </div>
 
@@ -137,7 +135,7 @@ export function Hero() {
       </div>
 
       <Link to="/projects" className="sr-only">
-        Browse the full project archive
+        {t("hero.archiveLink")}
       </Link>
     </section>
   );

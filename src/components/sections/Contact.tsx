@@ -15,31 +15,35 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Reveal, SectionHeading } from "@/components/Reveal";
+import { useLang } from "@/i18n/LanguageProvider";
 
-const schema = z.object({
-  name: z.string().min(2, "Please tell us your name."),
-  email: z.string().email("That email address doesn't look right."),
-  company: z.string().optional(),
-  message: z.string().min(20, "A little more detail helps — 20 characters minimum."),
-});
+const makeSchema = (t: (k: string) => string) =>
+  z.object({
+    name: z.string().min(2, t("contact.errName")),
+    email: z.string().email(t("contact.errEmail")),
+    company: z.string().optional(),
+    message: z.string().min(20, t("contact.errMessage")),
+  });
 
-type FormValues = z.infer<typeof schema>;
-
-const contactPoints = [
-  { Icon: Mail, label: "studio@tec-technology.com", href: "mailto:studio@tec-technology.com" },
-  { Icon: Phone, label: "+1 (415) 555-0148", href: "tel:+14155550148" },
-  { Icon: MapPin, label: "Remote-first · CET & EST overlap", href: null },
-];
+type FormValues = z.infer<ReturnType<typeof makeSchema>>;
 
 export function Contact() {
+  const { t } = useLang();
+
+  const contactPoints = [
+    { Icon: Mail, label: "studio@ftp.com", href: "mailto:studio@ftp.com" },
+    { Icon: Phone, label: "+1 (415) 555-0148", href: "tel:+14155550148" },
+    { Icon: MapPin, label: t("contact.location"), href: null },
+  ];
+
   const form = useForm<FormValues>({
-    resolver: zodResolver(schema),
+    resolver: zodResolver(makeSchema(t)),
     defaultValues: { name: "", email: "", company: "", message: "" },
   });
 
   function onSubmit(values: FormValues) {
-    toast.success("Thanks — your brief is with us.", {
-      description: `We'll reply to ${values.email} within one business day.`,
+    toast.success(t("contact.toastTitle"), {
+      description: t("contact.toastBody").replace("{email}", values.email),
     });
     form.reset();
   }
@@ -63,9 +67,9 @@ export function Contact() {
       <div className="mx-auto grid max-w-6xl gap-14 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr]">
         <div>
           <SectionHeading
-            eyebrow="Contact"
-            title="Tell us what you're building."
-            intro="Send a few lines about the project. We reply within one business day, and the first call is with an engineer, not a salesperson."
+            eyebrow={t("contact.eyebrow")}
+            title={t("contact.title")}
+            intro={t("contact.intro")}
           />
 
           <Reveal delay={0.1} className="mt-10 space-y-4">
@@ -94,9 +98,9 @@ export function Contact() {
                     name="name"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Name</FormLabel>
+                        <FormLabel>{t("contact.name")}</FormLabel>
                         <FormControl>
-                          <Input placeholder="Dana Whitfield" {...field} />
+                          <Input placeholder={t("contact.namePlaceholder")} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -107,9 +111,9 @@ export function Contact() {
                     name="email"
                     render={({ field }) => (
                       <FormItem>
-                        <FormLabel>Email</FormLabel>
+                        <FormLabel>{t("contact.email")}</FormLabel>
                         <FormControl>
-                          <Input type="email" placeholder="you@company.com" {...field} />
+                          <Input type="email" placeholder={t("contact.emailPlaceholder")} {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -122,9 +126,9 @@ export function Contact() {
                   name="company"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Company (optional)</FormLabel>
+                      <FormLabel>{t("contact.company")}</FormLabel>
                       <FormControl>
-                        <Input placeholder="Atlas Home Goods" {...field} />
+                        <Input placeholder={t("contact.companyPlaceholder")} {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -136,11 +140,11 @@ export function Contact() {
                   name="message"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Project brief</FormLabel>
+                      <FormLabel>{t("contact.message")}</FormLabel>
                       <FormControl>
                         <Textarea
                           rows={5}
-                          placeholder="What are you building, what's the deadline, and what does success look like?"
+                          placeholder={t("contact.messagePlaceholder")}
                           {...field}
                         />
                       </FormControl>
@@ -150,10 +154,10 @@ export function Contact() {
                 />
 
                 <Button type="submit" size="lg" className="w-full">
-                  Send brief
+                  {t("contact.submit")}
                 </Button>
                 <p className="text-xs text-muted-foreground">
-                  We use your details only to reply to this enquiry.
+                  {t("contact.privacy")}
                 </p>
               </form>
             </Form>

@@ -7,9 +7,9 @@ import { Stats } from "@/components/sections/Stats";
 import { Testimonials } from "@/components/sections/Testimonials";
 import { Contact } from "@/components/sections/Contact";
 
-const title = "Tec-Technology — Software Development Agency";
+const title = "FTP — Software Development Agency";
 const description =
-  "Tec-Technology builds e-commerce platforms, portfolio sites and custom software. React, TypeScript and Node.js engineering delivered end to end.";
+  "FTP builds e-commerce platforms, portfolio sites and custom software. React, TypeScript and Node.js engineering delivered end to end.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -26,7 +26,7 @@ export const Route = createFileRoute("/")({
 function Index() {
   return (
     <main>
-      <h1 className="sr-only">Tec-Technology — software development agency</h1>
+      <h1 className="sr-only">FTP — software development agency</h1>
       <Hero />
       <Vision />
       <Services />

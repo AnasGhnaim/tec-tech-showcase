@@ -5,13 +5,14 @@ import { Menu, Moon, Sun } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { useTheme } from "@/components/theme-provider";
+import { useLang } from "@/i18n/LanguageProvider";
 import { cn } from "@/lib/utils";
 
 const links = [
-  { label: "Vision", hash: "vision" },
-  { label: "Services", hash: "services" },
-  { label: "Projects", hash: "projects" },
-  { label: "Contact", hash: "contact" },
+  { key: "vision", hash: "vision" },
+  { key: "services", hash: "services" },
+  { key: "projects", hash: "projects" },
+  { key: "contact", hash: "contact" },
 ];
 
 function Wordmark() {
@@ -22,8 +23,8 @@ function Wordmark() {
         <path d="M9 11h14M16 11v12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
         <circle cx="16" cy="23" r="2.2" fill="currentColor" />
       </svg>
-      <span className="font-display text-base font-semibold tracking-tight">
-        Tec<span className="text-accent">-</span>Technology
+      <span className="font-display text-base font-semibold tracking-tight" dir="ltr">
+        FT<span className="text-accent">P</span>
       </span>
     </span>
   );
@@ -33,6 +34,7 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const { theme, toggle } = useTheme();
+  const { t, lang, toggle: toggleLang } = useLang();
   const reduced = useReducedMotion();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const onHome = pathname === "/";
@@ -57,7 +59,7 @@ export function Navbar() {
       )}
     >
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-8">
-        <Link to="/" aria-label="Tec-Technology home">
+        <Link to="/" aria-label={t("nav.home")}>
           <Wordmark />
         </Link>
 
@@ -69,7 +71,7 @@ export function Navbar() {
                 href={`#${l.hash}`}
                 className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-foreground"
               >
-                {l.label}
+                {t(`nav.${l.key}`)}
               </a>
             ) : (
               <Link
@@ -78,7 +80,7 @@ export function Navbar() {
                 hash={l.hash}
                 className="font-mono text-xs uppercase tracking-[0.16em] text-muted-foreground transition-colors hover:text-foreground"
               >
-                {l.label}
+                {t(`nav.${l.key}`)}
               </Link>
             ),
           )}
@@ -87,22 +89,32 @@ export function Navbar() {
         <div className="flex items-center gap-1.5">
           <Button
             variant="ghost"
+            size="sm"
+            onClick={toggleLang}
+            aria-label={t("nav.languageAria")}
+            className="font-mono text-xs uppercase tracking-[0.14em]"
+          >
+            {lang === "en" ? "AR" : "EN"}
+          </Button>
+
+          <Button
+            variant="ghost"
             size="icon"
             onClick={toggle}
-            aria-label={theme === "dark" ? "Switch to light theme" : "Switch to dark theme"}
+            aria-label={theme === "dark" ? t("nav.toLight") : t("nav.toDark")}
           >
             {theme === "dark" ? <Sun className="size-4" /> : <Moon className="size-4" />}
           </Button>
 
           <Button asChild size="sm" className="hidden md:inline-flex">
             <Link to="/" hash="contact">
-              Start a project
+              {t("nav.cta")}
             </Link>
           </Button>
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
-              <Button variant="ghost" size="icon" className="md:hidden" aria-label="Open menu">
+              <Button variant="ghost" size="icon" className="md:hidden" aria-label={t("nav.openMenu")}>
                 <Menu className="size-5" />
               </Button>
             </SheetTrigger>
@@ -118,7 +130,7 @@ export function Navbar() {
                     onClick={() => setOpen(false)}
                     className="rounded-md px-3 py-3 font-display text-xl font-medium transition-colors hover:bg-secondary"
                   >
-                    {l.label}
+                    {t(`nav.${l.key}`)}
                   </a>
                 ))}
                 <a
@@ -126,11 +138,11 @@ export function Navbar() {
                   onClick={() => setOpen(false)}
                   className="rounded-md px-3 py-3 font-display text-xl font-medium transition-colors hover:bg-secondary"
                 >
-                  All work
+                  {t("nav.allWork")}
                 </a>
                 <Button asChild className="mt-4">
                   <a href="/#contact" onClick={() => setOpen(false)}>
-                    Start a project
+                    {t("nav.cta")}
                   </a>
                 </Button>
               </div>

@@ -3,10 +3,12 @@ import { ArrowUpRight } from "lucide-react";
 import { projects } from "@/data/projects";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/Reveal";
+import { useLang } from "@/i18n/LanguageProvider";
+import { projectsAr } from "@/i18n/content";
 
-const title = "Project archive — Tec-Technology";
+const title = "Project archive — FTP";
 const description =
-  "Every Tec-Technology engagement: e-commerce platforms, SaaS dashboards, portfolio sites and mobile apps, with the stack and outcomes for each.";
+  "Every FTP engagement: e-commerce platforms, SaaS dashboards, portfolio sites and mobile apps, with the stack and outcomes for each.";
 
 export const Route = createFileRoute("/projects")({
   head: () => ({
@@ -21,24 +23,28 @@ export const Route = createFileRoute("/projects")({
 });
 
 function ProjectsPage() {
+  const { t, lang } = useLang();
+
   return (
     <main className="mx-auto max-w-6xl px-5 pt-32 pb-24 sm:px-8 sm:pt-40">
       <Reveal>
-        <p className="eyebrow">Archive</p>
+        <p className="eyebrow">{t("archive.eyebrow")}</p>
         <h1 className="mt-4 max-w-3xl text-4xl font-semibold text-balance sm:text-5xl">
-          Every project we have shipped and still stand behind.
+          {t("archive.title")}
         </h1>
         <p className="mt-5 max-w-2xl text-base leading-relaxed text-muted-foreground">
-          Commerce, product, editorial and mobile work delivered by the same team that scoped it.
+          {t("archive.intro")}
         </p>
       </Reveal>
 
       <div className="mt-16 divide-y divide-border border-y border-border">
-        {projects.map((p, i) => (
-          <Reveal key={p.slug} delay={Math.min(i * 0.06, 0.3)}>
+        {projects.map((base, i) => {
+          const p = { ...base, ...(lang === "ar" ? (projectsAr[base.slug] ?? {}) : {}) };
+          return (
+          <Reveal key={base.slug} delay={Math.min(i * 0.06, 0.3)}>
             <Link
               to="/project/$slug"
-              params={{ slug: p.slug }}
+              params={{ slug: base.slug }}
               className="group grid gap-6 py-8 sm:grid-cols-[200px_1fr_auto] sm:items-center"
             >
               <img
@@ -53,7 +59,7 @@ function ProjectsPage() {
                 <div className="flex flex-wrap items-center gap-3">
                   <h2 className="font-display text-xl font-semibold">{p.title}</h2>
                   <Badge variant="secondary" className="font-mono text-[10px] font-normal">
-                    {p.category}
+                    {t(`projects.${base.category}`)}
                   </Badge>
                 </div>
                 <p className="mt-1 font-mono text-[11px] uppercase tracking-[0.16em] text-muted-foreground">
@@ -61,10 +67,11 @@ function ProjectsPage() {
                 </p>
                 <p className="mt-3 max-w-xl text-sm leading-relaxed text-muted-foreground">{p.summary}</p>
               </div>
-              <ArrowUpRight className="size-5 text-muted-foreground transition-colors group-hover:text-accent" />
+              <ArrowUpRight className="size-5 text-muted-foreground transition-colors group-hover:text-accent rtl:-scale-x-100" />
             </Link>
           </Reveal>
-        ))}
+          );
+        })}
       </div>
     </main>
   );
