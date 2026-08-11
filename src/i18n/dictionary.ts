@@ -155,6 +155,12 @@ export const dict = {
       en: "We'll reply to {email} within one business day.",
       ar: "سنرد على {email} خلال يوم عمل واحد.",
     },
+    sending: { en: "Sending…", ar: "جارٍ الإرسال…" },
+    errorTitle: { en: "Your message didn't send.", ar: "تعذّر إرسال رسالتك." },
+    errorBody: {
+      en: "Please try again in a moment, or email studio@ftp.com directly.",
+      ar: "حاول مرة أخرى بعد قليل، أو راسلنا على studio@ftp.com مباشرة.",
+    },
   },
 
   footer: {

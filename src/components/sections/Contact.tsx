@@ -1,4 +1,5 @@
 import { useForm } from "react-hook-form";
+import { useServerFn } from "@tanstack/react-start";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { toast } from "sonner";
@@ -16,19 +17,21 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Reveal, SectionHeading } from "@/components/Reveal";
 import { useLang } from "@/i18n/LanguageProvider";
+import { sendContactMessage } from "@/lib/contact.functions";
 
 const makeSchema = (t: (k: string) => string) =>
   z.object({
-    name: z.string().min(2, t("contact.errName")),
-    email: z.string().email(t("contact.errEmail")),
-    company: z.string().optional(),
-    message: z.string().min(20, t("contact.errMessage")),
+    name: z.string().trim().min(2, t("contact.errName")).max(100),
+    email: z.string().trim().email(t("contact.errEmail")).max(255),
+    company: z.string().trim().max(120).optional(),
+    message: z.string().trim().min(20, t("contact.errMessage")).max(2000),
   });
 
 type FormValues = z.infer<ReturnType<typeof makeSchema>>;
 
 export function Contact() {
   const { t } = useLang();
+  const submitContact = useServerFn(sendContactMessage);
 
   const contactPoints = [
     { Icon: Mail, label: "studio@ftp.com", href: "mailto:studio@ftp.com" },
@@ -41,12 +44,21 @@ export function Contact() {
     defaultValues: { name: "", email: "", company: "", message: "" },
   });
 
-  function onSubmit(values: FormValues) {
-    toast.success(t("contact.toastTitle"), {
-      description: t("contact.toastBody").replace("{email}", values.email),
-    });
-    form.reset();
+  async function onSubmit(values: FormValues) {
+    try {
+      const result = await submitContact({ data: values });
+      if (!result.ok) throw new Error(result.error);
+      toast.success(t("contact.toastTitle"), {
+        description: t("contact.toastBody").replace("{email}", values.email),
+      });
+      form.reset();
+    } catch {
+      toast.error(t("contact.errorTitle"), {
+        description: t("contact.errorBody"),
+      });
+    }
   }
+
 
   return (
     <section id="contact" className="relative scroll-mt-24 overflow-hidden border-t border-border py-24 sm:py-32">
@@ -153,8 +165,8 @@ export function Contact() {
                   )}
                 />
 
-                <Button type="submit" size="lg" className="w-full">
-                  {t("contact.submit")}
+                <Button type="submit" size="lg" className="w-full" disabled={form.formState.isSubmitting}>
+                  {form.formState.isSubmitting ? t("contact.sending") : t("contact.submit")}
                 </Button>
                 <p className="text-xs text-muted-foreground">
                   {t("contact.privacy")}
