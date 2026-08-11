@@ -165,8 +165,8 @@ export function Contact() {
                   )}
                 />
 
-                <Button type="submit" size="lg" className="w-full">
-                  {t("contact.submit")}
+                <Button type="submit" size="lg" className="w-full" disabled={form.formState.isSubmitting}>
+                  {form.formState.isSubmitting ? t("contact.sending") : t("contact.submit")}
                 </Button>
                 <p className="text-xs text-muted-foreground">
                   {t("contact.privacy")}
