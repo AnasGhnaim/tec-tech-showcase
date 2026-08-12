@@ -20,7 +20,7 @@ const RESEND_ENDPOINT = "https://api.resend.com/emails";
 
 // Change these once your own domain is verified in Resend.
 const FROM = "FTP <onboarding@resend.dev>";
-const TEAM_INBOX = "studio@ftp.com";
+const TEAM_INBOX = "ghnaimanas20@gmail.com";
 
 async function sendEmail(
   apiKey: string,
