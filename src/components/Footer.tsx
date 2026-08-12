@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { useLang } from "@/i18n/LanguageProvider";
 
-const year = new Date().getFullYear();
+const year = 2026;
 
 export function Footer() {
   const { t } = useLang();
