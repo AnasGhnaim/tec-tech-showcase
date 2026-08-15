@@ -19,12 +19,16 @@ const stats: Stat[] = [
 
 function Counter({ value, suffix }: { value: number; suffix: string }) {
   const ref = useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
+  const inView = useInView(ref, { once: true, amount: 0.2 });
   const reduced = useReducedMotion();
   const [display, setDisplay] = useState(0);
 
   useEffect(() => {
-    if (!inView) return;
+    if (!inView) {
+      // Safety net: if the observer never fires (some mobile browsers), show the value.
+      const fallback = window.setTimeout(() => setDisplay(value), 1500);
+      return () => window.clearTimeout(fallback);
+    }
     if (reduced) {
       setDisplay(value);
       return;

@@ -158,8 +158,8 @@ export const dict = {
     sending: { en: "Sending…", ar: "جارٍ الإرسال…" },
     errorTitle: { en: "Your message didn't send.", ar: "تعذّر إرسال رسالتك." },
     errorBody: {
-      en: "Please try again in a moment, or email studio@ftp.com directly.",
-      ar: "حاول مرة أخرى بعد قليل، أو راسلنا على studio@ftp.com مباشرة.",
+      en: "Please try again in a moment, or email ghnaimanas20@gmail.com directly.",
+      ar: "حاول مرة أخرى بعد قليل، أو راسلنا على ghnaimanas20@gmail.com مباشرة.",
     },
   },
 
