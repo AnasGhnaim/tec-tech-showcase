@@ -55,7 +55,7 @@ export default function HeroCanvas({ reduced = false }: { reduced?: boolean }) {
   return (
     <Canvas
       camera={{ position: [0, 0, 6.4], fov: 45 }}
-      dpr={[1, 1.6]}
+      dpr={[1, 1.5]}
       frameloop={reduced ? "demand" : "always"}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
     >

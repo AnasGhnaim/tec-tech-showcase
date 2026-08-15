@@ -34,8 +34,8 @@ export function Contact() {
   const submitContact = useServerFn(sendContactMessage);
 
   const contactPoints = [
-    { Icon: Mail, label: "studio@ftp.com", href: "mailto:studio@ftp.com" },
-    { Icon: Phone, label: "+1 (415) 555-0148", href: "tel:+14155550148" },
+    { Icon: Mail, label: "ghnaimanas20@gmail.com", href: "mailto:ghnaimanas20@gmail.com" },
+    { Icon: Phone, label: "+962 788640391", href: "tel:+962788640391" },
     { Icon: MapPin, label: t("contact.location"), href: null },
   ];
 

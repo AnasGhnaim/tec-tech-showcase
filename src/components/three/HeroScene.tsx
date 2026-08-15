@@ -26,8 +26,7 @@ function isCapableDevice() {
     const hasWebGL = Boolean(
       canvas.getContext("webgl2") ?? canvas.getContext("webgl"),
     );
-    const cores = navigator.hardwareConcurrency ?? 4;
-    return hasWebGL && cores >= 4 && window.innerWidth >= 640;
+    return hasWebGL;
   } catch {
     return false;
   }
